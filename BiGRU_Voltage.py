@@ -3,8 +3,7 @@
 """
 Created on Mon Sep 17 16:49:24 2018
 
-@author: amin
-@editors: saeid & qasymjomart
+@authors: Amin, Kassymzhomart, Saeid
 """
 
 #%% training data
