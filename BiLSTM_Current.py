@@ -3,7 +3,7 @@
 """
 Created on Mon Sep 17 16:49:24 2018
 
-@authors: amin, saeid, qasymjomart
+@authors: Amin, Kassymzhomart, Saeid
 
 """
 
