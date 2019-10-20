@@ -14,7 +14,7 @@ import os
 
 import scipy.io as io
 #os.environ['KMP_DUPLICATE_LIB_OK']='True'
-data_dir= '/Users/saeid.akhavan/Documents/research/dr amin/paper/4Saied_DNN_Transformer'
+data_dir= '/Users/DataAnalytics/Data/FaultyDetection'
 
 os.chdir(data_dir)
 
