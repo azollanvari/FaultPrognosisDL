@@ -13,7 +13,7 @@ import os
 #os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
 
 import scipy.io as io
-data_dir= '/Users/kassymzhomart.kunanb/Documents/TFP/4Saied_DNN_Transformer'
+data_dir= '/Users/DataAnalytics/Data/FaultyDetection'
 
 os.chdir(data_dir)
 
