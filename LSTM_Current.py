@@ -14,7 +14,7 @@ os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
 
 import scipy.io as io
 #os.environ['KMP_DUPLICATE_LIB_OK']='True'
-data_dir= '/Users/kassymzhomart/Documents/Research/TFP_Aug/4Saied_DNN_Transformer'
+data_dir= '/Users/DataAnalytics/Data/FaultyDetection'
 
 os.chdir(data_dir)
 
