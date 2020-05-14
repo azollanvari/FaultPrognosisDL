@@ -3,8 +3,8 @@
 """
 Created on Mon Sep 17 16:49:24 2018
 
-@authors: Amin, Kassymzhomart, Saeid
-
+@author: amin
+@editors: saeid & qasymjomart
 """
 
 #%% training data
@@ -14,9 +14,9 @@ import os
 
 import scipy.io as io
 #os.environ['KMP_DUPLICATE_LIB_OK']='True'
-data_dir= '/Users/DataAnalytics/Data/FaultyDetection'
+# data_dir= '/Users/kassymzhomart.kunanb/Documents/TFP/4Saied_DNN_Transformer'
 
-os.chdir(data_dir)
+# os.chdir(data_dir)
 
 import tensorflow as tf
 config = tf.ConfigProto()
@@ -24,7 +24,31 @@ config.gpu_options.allow_growth = True
 session = tf.Session(config=config)
 
 
+#%%REd data from csv
+#fname = os.path.join(data_dir, 'Train.csv') #for csv
+# there are 8 subjects, and 'subjects' array is to control which subjects to load 
+#f = open(fname)
+#dataTr = f.read()
+#f.close()
+#
+#lines = dataTr.split('\n')
+#header = lines[0].split(',')
+#Now, convert all lines of data into a Numpy array.
+#import numpy as np
+#
+#float_data_train = np.zeros((len(lines), len(header)))
+#for i, line in enumerate(lines):
+#    values = [float(x) for x in line.split(',')[0:]]
+#    float_data_train[i, :] = values
+#
+#from matplotlib import pyplot as plt
+#temp = float_data_train[:, 1] #voltage
+#plt.plot(range(len(temp)), temp)
 
+
+#%%
+#lines = lines[1:]
+#print(header)
 file_ind = ['320','340','360','380','400','420','440']
 
 Fs=3000
@@ -62,6 +86,10 @@ for file in file_ind:
     data_test_list.append(data_temp_test)
 
 
+#lines = lines[1:]
+#print(header)
+#print(len(lines))
+
 data_train = np.concatenate(data_train_list, axis=0) #convert the list to np arrays
 data_valid = np.concatenate(data_valid_list, axis=0)
 data_test = np.concatenate(data_test_list, axis=0)
@@ -75,6 +103,18 @@ temp = data_test[:, 1] #voltage
 plt.plot(range(len(temp)), temp)
 
 
+
+#%% Normalize using mean and std of training
+#mean = data_train.mean(axis=0)
+#data_train -= mean
+#std = data_train.std(axis=0)
+#data_train /= std
+#
+#
+#data_valid -= mean
+#data_valid /= std
+#data_test -= mean
+#data_test /= std
 
 
 dmin=data_train.min(axis=0)
@@ -189,7 +229,7 @@ import matplotlib.pyplot as plt
 from keras import backend as K
 
 
-for num_units in units_test: 
+for num_units in units: 
     #K.clear_session()
     filenameFig = 'Voltage_GRU'
     
@@ -224,7 +264,7 @@ for num_units in units_test:
     #print('Here!')
     
     #model.compile(optimizer=RMSprop(lr=0.001), loss='mse', metrics=['mae','mape'])
-    model.compile(optimizer=RMSprop(), loss='mse', metrics=['mae','mape'])
+    model.compile(optimizer=RMSprop(lr=0.0001), loss='mse', metrics=['mae','mape'])
     history = model.fit_generator(train_gen,
                               steps_per_epoch=500,
                               epochs=150,
@@ -307,8 +347,9 @@ for num_units in units_test:
     plt.xticks(xint)
     plt.xlabel('Epochs')
     plt.ylabel('MSE')
-    plt.legend()
-    filename1 = filename + '_loss' 
+    plt.legend(loc="best")
+    filename1 = filename + '_loss'
+    fig.set_size_inches(5.46, 3.83) 
     fig.savefig(filename1 + '.pdf', bbox_inches='tight')
     
     
